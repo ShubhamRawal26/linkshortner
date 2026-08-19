@@ -1,0 +1,143 @@
+/* CSS Variables for Light Mode and Dark Mode */
+:root {
+    --bg-main-from: #ffffff;
+    --bg-main-to: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --card-bg: #ffffff;
+    --card-border: #f1f5f9;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --nav-bg: rgba(255, 255, 255, 0.75);
+    --nav-border: rgba(226, 232, 240, 0.8);
+    --input-bg: #f8fafc;
+    --input-border: #f1f5f9;
+    --result-bg: #eff6ff;
+    --result-border: #dbeafe;
+    --feature-bg: rgba(255, 255, 255, 0.8);
+}
+
+html.dark {
+    --bg-main-from: #0b0f19;
+    --bg-main-to: #111827;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --card-bg: #1e293b;
+    --card-border: #334155;
+    --glass-bg: rgba(30, 41, 59, 0.75);
+    --glass-border: rgba(51, 65, 85, 0.5);
+    --nav-bg: rgba(15, 23, 42, 0.8);
+    --nav-border: rgba(51, 65, 85, 0.6);
+    --input-bg: #0f172a;
+    --input-border: #334155;
+    --result-bg: #1e293b;
+    --result-border: #334155;
+    --feature-bg: rgba(30, 41, 59, 0.7);
+}
+
+/* Global Body & Smooth Theme Transition */
+body {
+    background: radial-gradient(circle at top center, var(--bg-main-from) 0%, var(--bg-main-to) 100%);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme Switcher Segmented Control */
+.theme-switcher-pill {
+    background-color: rgba(241, 245, 249, 0.85);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+html.dark .theme-switcher-pill {
+    background-color: rgba(30, 41, 59, 0.85);
+    border-color: rgba(51, 65, 85, 0.8);
+}
+
+.theme-btn {
+    transition: all 0.25s ease;
+    position: relative;
+}
+
+.theme-btn.active {
+    background-color: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+html.dark .theme-btn.active {
+    background-color: #334155;
+    color: #f8fafc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Light mode indicator requirement: Light Mode (☀️) — Highlighted with an active orange circular indicator (#FF6B00). */
+.theme-btn-light.active::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 6px;
+    height: 6px;
+    background-color: #FF6B00;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #FF6B00;
+}
+
+/* Custom Text Gradients & Animations */
+.gradient-text {
+    background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.animated-bg {
+    background: linear-gradient(120deg, #2563eb, #4f46e5, #3b82f6);
+    background-size: 200% 200%;
+    animation: gradientShift 5s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Expanding result card */
+#resultContainer {
+    max-height: 0;
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    visibility: hidden;
+}
+
+#resultContainer.show {
+    max-height: 300px;
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    margin-top: 2rem;
+    visibility: visible;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+}
+
+/* Footer Link Badge Button */
+.footer-badge-btn {
+    background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    transition: all 0.3s ease;
+}
+
+.footer-badge-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
